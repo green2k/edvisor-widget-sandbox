@@ -4,7 +4,7 @@
   "description": "This is just a test.",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "test": "jest"
   },
   "author": "Pavol Knapek",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "typescript": "2.3.x"
   },
   "devDependencies": {
+    "enzyme": "^2.9.1",
     "react-test-renderer": "^15.6.1",
     "ts-jest": "^20.0.6"
   },
