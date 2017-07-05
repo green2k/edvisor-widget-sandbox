@@ -3,7 +3,7 @@ module.exports = {
 	output: {
 		path: __dirname + "/dist", 
 		filename: "bundle.js", 
-		library: ['edvisor'], 
+		library: ['Edvisor'], 
 		libraryTarget: 'umd', 
 		publicPath: "/dist/"
 	}, 

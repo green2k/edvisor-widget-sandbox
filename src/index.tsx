@@ -26,12 +26,18 @@ let store = createStore(
 	)
 );
 
-// Render the application
-ReactDOM.render(
-	<ApolloProvider store={store} client={client}>
-		<MemoryRouter>
-			<App />
-		</MemoryRouter>
-	</ApolloProvider>,
-	document.getElementById("root")
-);
+export const widgets = {
+	courseSearchWidget: {
+		render: (args) => {
+			// Render the application
+			ReactDOM.render(
+				<ApolloProvider store={store} client={client}>
+					<MemoryRouter>
+						<App />
+					</MemoryRouter>
+				</ApolloProvider>,
+				document.querySelector(args.selector)
+			);
+		}
+	}
+}

@@ -3,9 +3,19 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Edvisor widget sandbox!</title>
+
+		<!-- Load the Edvisor widget from CDN -->
+		<script type="text/javascript" src="./dist/bundle.js"></script>
 	</head>
 	<body>
-		<div id="root"></div>
-		<script type="text/javascript" src="./dist/bundle.js"></script>
+		<h1>Simon Frasier University</h1>
+		<div>SFU Vancouver's mission is to enhance its status as a dynamic, engaged and accessible urban university campus.</div>
+		<div id="widget" style="border: 1px solid black"></div>
+		<div>CONNECT WITH US [Facebook] [Instagram] [Twitter]</div>
+
+		<!-- Render the Edvisor widget -->
+		<script type="text/javascript">
+			Edvisor.widgets.courseSearchWidget.render({selector: "#widget"});
+		</script>
 	</body>
 </html>
