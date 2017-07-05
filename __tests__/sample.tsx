@@ -1,12 +1,11 @@
 import * as React from 'react'
-import * as TestUtils from 'react-addons-test-utils'
+import * as renderer from 'react-test-renderer';
 
 import Course from '../src/components/Course'
 
 describe('<Course />', () => {
   it('renders', () => {
-    expect(TestUtils.createRenderer().render(
-      <Course name="Course 1" />
-    )).toMatchSnapshot()
+  	const tree = renderer.create(<Course name="Course 1" />).toJSON()
+  	expect(tree).toMatchSnapshot()
   })
 });

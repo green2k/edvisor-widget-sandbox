@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Course /> renders 1`] = `
+<div>
+  <h1>
+    Course 1
+  </h1>
+  <div>
+    Language: 
+  </div>
+  <div>
+    Description: 
+  </div>
+  <div>
+    Price: 
+  </div>
+  <div>
+    Age: 
+     - 
+  </div>
+</div>
+`;
