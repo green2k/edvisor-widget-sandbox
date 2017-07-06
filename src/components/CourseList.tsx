@@ -9,7 +9,7 @@ export const CourseList = ({isLoading, courses}) => (
 				: (
 					(courses.length >= 1)
 					? courses.map(course => (
-						<Course key={course.id} name={course.name} description={course.description} price={course.price} ageMin={course.ageMin} ageMax={course.ageMax}/>
+						<Course key={course.id} name={course.name} description={course.description} price={course.price} ageMin={!(course.ageMin) ? '*' : course.ageMin} ageMax={!(course.ageMax) ? '*' : course.ageMax}/>
 					))
 					: <div>Nothing found :-(</div>
 				)

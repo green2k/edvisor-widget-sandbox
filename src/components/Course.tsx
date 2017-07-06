@@ -5,7 +5,7 @@ export const Course = ({name, description, price, ageMin, ageMax}) => (
 		<h1>{name}</h1>
 		<div>Description: {description}</div>
 		<div>Price: {price}</div>
-		<div>Age: {ageMin} - {ageMax}</div>
+		<div>Required age: {ageMin} - {ageMax}</div>
 	</div>
 );
 

@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import CourseListScreen from '../components/CourseListScreen'
 
 const QUERY = gql`
-  query OfferingSearchQuery($offeringCourseCategoryIds: [Int!]) {
-    offeringSearch(filter: {offeringCourseCategoryIds: $offeringCourseCategoryIds}) {
+  query OfferingSearchQuery($studentAge: Int!, $offeringCourseCategoryIds: [Int!]) {
+    offeringSearch(filter: {age: {eq: $studentAge}, offeringCourseCategoryIds: $offeringCourseCategoryIds}) {
       durationAmount, 
       durationType {
         durationTypeId
@@ -16,6 +16,8 @@ const QUERY = gql`
       }, 
       offering {
         offeringId, 
+        reqMinAge, 
+        reqMaxAge, 
         offeringCourse {
           offeringCourseCategoryId, 
           offeringCourseCategory {
@@ -29,15 +31,15 @@ const QUERY = gql`
 `
 
 const CourseListScreenWithData = graphql<any, any>(QUERY, {
-  options: ({ offeringCourseCategoryIds }) => ({ variables: {offeringCourseCategoryIds} }),
+  options: ({ studentAge, offeringCourseCategoryIds }) => ({ variables: {studentAge, offeringCourseCategoryIds} }),
   props: ({ ownProps, data: {loading, offeringSearch} }) => ({
     isLoading: loading, 
     courses: (!offeringSearch) ? [] : offeringSearch.map((course) => ({
       id: course.offering.offeringId, 
       name: course.offering.offeringCourse.name, 
       description: "n/a", // Mock
-      ageMin: 1, // Mock
-      ageMax: 99, // Mock
+      ageMin: course.offering.reqMinAge, 
+      ageMax: course.offering.reqMaxAge, 
       price: !(course.price) ? null : course.price.originalPrice
     }))
   })
@@ -45,7 +47,8 @@ const CourseListScreenWithData = graphql<any, any>(QUERY, {
 
 const CourseListScreenWithDataAndState = connect(
   (state) => ({
-    offeringCourseCategoryIds: state.courseFilter.courseTypes.map((courseType) => {return courseType.value})
+    offeringCourseCategoryIds: state.courseFilter.courseTypes.map((courseType) => {return courseType.value}), 
+    studentAge: state.courseFilter.age
   }), 
   (dispatch) => ({})
 )(CourseListScreenWithData)
