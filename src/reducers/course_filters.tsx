@@ -4,7 +4,8 @@ export const courseFiltersReducer = (state = {}, action) => {
       return {
         ...state, 
         age: action.age, 
-        language: action.language
+        language: action.language, 
+        courseTypes: action.courseTypes
       };
     default:
       return state;
