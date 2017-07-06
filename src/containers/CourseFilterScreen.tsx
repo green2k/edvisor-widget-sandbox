@@ -1,7 +1,27 @@
+import {gql, graphql} from 'react-apollo';
 import {connect} from 'react-redux'
 
 import {setCourseFilter} from '../actions'
 import CourseFilterScreen from '../components/CourseFilterScreen'
+
+const QUERY = gql`
+  query CourseCategoriesQuery {
+    offeringCourseCategories {
+      offeringCourseCategoryId, 
+      codeName
+    }
+  }
+`
+
+const CourseFilterScreenWithData = graphql<any, any>(QUERY, {
+  props: ({ ownProps, data: {loading, offeringCourseCategories} }) => ({
+    isLoading: loading, 
+    courseTypesAll: (!offeringCourseCategories) ? [] : offeringCourseCategories.map((courseType) => ({
+      value: courseType.offeringCourseCategoryId, 
+      label: courseType.codeName
+    }))
+  })
+})(CourseFilterScreen)
 
 const mapStateToProps = (state) => {
   return {
@@ -22,6 +42,6 @@ const mapDispatchToProps = (dispatch) => {
 const container = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CourseFilterScreen)
+)(CourseFilterScreenWithData)
 
 export default container

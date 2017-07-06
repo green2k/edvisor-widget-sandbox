@@ -62,7 +62,7 @@ class CourseFilterScreen extends React.Component<any, any> {
 						Language: <input name='courseLanguage' type='text' value={this.state.language} onChange={this.handleLanguageChange} />
 					</div>
 					<div>
-						Course type: <CourseTypeInput defaultValues={this.state.courseTypes} onChange={this.handleCourseTypesChange} />
+						Course type: <CourseTypeInput options={this.props.courseTypesAll} defaultValues={this.state.courseTypes} onChange={this.handleCourseTypesChange} />
 					</div>
 					<div>
 						<input type="submit" value="Search courses!" />

@@ -2,13 +2,7 @@ import * as React from 'react';
 
 import {MultiSelect} from 'react-selectize'
 
-const CourseTypeInput = ({defaultValues, onChange}) => {
-	const options = [
-		{value: "GENERAL_ENGLISH", label: "General English"}, 
-		{value: "BUSINESS_ENGLISH", label: "Business English"}, 
-		{value: "ACADEMIC_ENGLISH", label: "Academic English"}
-	]
-
+const CourseTypeInput = ({options, defaultValues, onChange}) => {
 	return (
 		<MultiSelect
 			options={options}
