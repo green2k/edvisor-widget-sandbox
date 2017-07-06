@@ -5,9 +5,9 @@ import CourseList from './CourseList'
 
 const CourseListScreen = ({isLoading, courses}) => (
 	<div>
-		<CourseList courses={courses} isLoading={isLoading} />
-		<hr />
 		<div><Link to={'/'}>Change filters!</Link></div>
+		<hr />
+		<CourseList courses={courses} isLoading={isLoading} />
 	</div>
 );
 

@@ -4,31 +4,48 @@ import {connect} from 'react-redux'
 import CourseListScreen from '../components/CourseListScreen'
 
 const QUERY = gql`
-  query CoursesQuery($studentAge: Int!, $courseLanguage: String!){
-    courses(studentAge: $studentAge, courseLanguage: $courseLanguage){
-      id, 
-      name, 
-      language, 
-      description, 
-      ageMin, 
-      ageMax, 
-      price
+  query OfferingSearchQuery($offeringCourseCategoryIds: [Int!]) {
+    offeringSearch(filter: {offeringCourseCategoryIds: $offeringCourseCategoryIds}) {
+      durationAmount, 
+      durationType {
+        durationTypeId
+        codeName
+      }, 
+      price {
+        originalPrice
+      }, 
+      offering {
+        offeringId, 
+        offeringCourse {
+          offeringCourseCategoryId, 
+          offeringCourseCategory {
+            codeName
+          }, 
+          name
+        }
+      }
     }
   }
 `
 
 const CourseListScreenWithData = graphql<any, any>(QUERY, {
-  options: ({ studentAge, courseLanguage }) => ({ variables: {studentAge, courseLanguage} }),
-  props: ({ ownProps, data: {loading, courses} }) => ({
+  options: ({ offeringCourseCategoryIds }) => ({ variables: {offeringCourseCategoryIds} }),
+  props: ({ ownProps, data: {loading, offeringSearch} }) => ({
     isLoading: loading, 
-    courses
+    courses: (!offeringSearch) ? [] : offeringSearch.map((course) => ({
+      id: course.offering.offeringId, 
+      name: course.offering.offeringCourse.name, 
+      description: "n/a", // Mock
+      ageMin: 1, // Mock
+      ageMax: 99, // Mock
+      price: !(course.price) ? null : course.price.originalPrice
+    }))
   })
 })(CourseListScreen)
 
 const CourseListScreenWithDataAndState = connect(
   (state) => ({
-    studentAge: state.courseFilter.age, 
-    courseLanguage: state.courseFilter.language
+    offeringCourseCategoryIds: state.courseFilter.courseTypes.map((courseType) => {return courseType.value})
   }), 
   (dispatch) => ({})
 )(CourseListScreenWithData)
