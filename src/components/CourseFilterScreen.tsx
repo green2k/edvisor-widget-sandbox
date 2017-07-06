@@ -30,9 +30,13 @@ class CourseFilterScreen extends React.Component<any, any> {
 		this.setState(newState);
 	}
 
-	// On form-submit, dispatch a Redux action & redirect to "/search"
 	private handleSubmit(event) {
 		event.preventDefault()
+
+		// Dummy input validation
+		if (!(this.state.age)) return alert('Please enter your age.');
+		
+		// Dispatch a Redux action & redirect to "/search"
 		this.props.onFilterChange(this.state.age, this.state.language)
 		this.props.history.push("/search")
 	}
