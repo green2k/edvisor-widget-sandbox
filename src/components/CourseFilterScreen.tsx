@@ -38,7 +38,6 @@ class CourseFilterScreen extends React.Component<any, any> {
 		const newState = this.state;
 		newState.courseTypes = courseTypes;
 		this.setState(newState);
-		console.log(this.state);
 	}
 
 	private handleSubmit(event) {
