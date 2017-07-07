@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
-import {MemoryRouter} from 'react-router-dom'
+import {HashRouter} from 'react-router-dom'
 import {ApolloClient, createNetworkInterface, ApolloProvider} from 'react-apollo'
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 
@@ -42,9 +42,9 @@ export const widgets = {
 			// Render the application
 			ReactDOM.render(
 				<ApolloProvider store={store} client={client}>
-					<MemoryRouter>
+					<HashRouter>
 						<App />
-					</MemoryRouter>
+					</HashRouter>
 				</ApolloProvider>,
 				document.querySelector(args.selector)
 			);
