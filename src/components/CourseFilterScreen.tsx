@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Link, withRouter} from 'react-router-dom'
 
 import CourseTypeInput from './CourseTypeInput'
+import FormInputAge from './FormInputAge'
 
 class CourseFilterScreen extends React.Component<any, any> {
 
@@ -56,7 +57,7 @@ class CourseFilterScreen extends React.Component<any, any> {
 			<div>
 				<form onSubmit={this.handleSubmit}>
 					<div>
-						Age: <input name='studentAge' type='number' value={this.state.age} onChange={this.handleAgeChange} />
+						Age: <FormInputAge name='studentAge' value={this.state.age} onChange={this.handleAgeChange} />
 					</div>
 					<div>
 						Language: <input name='courseLanguage' type='text' value={this.state.language} onChange={this.handleLanguageChange} />
