@@ -27,14 +27,15 @@ const mapStateToProps = (state) => {
   return {
     age: state.courseFilter.age, 
     language: state.courseFilter.language, 
-    courseTypes: state.courseFilter.courseTypes
+    courseTypes: state.courseFilter.courseTypes, 
+    countryId: state.courseFilter.countryId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFilterChange: (age: number, language: string, courseTypes: any) => {
-      dispatch(setCourseFilter(age, language, courseTypes))
+    onFilterChange: (age: number, countryId: number, language: string, courseTypes: any) => {
+      dispatch(setCourseFilter(age, countryId, language, courseTypes))
     }
   }
 }

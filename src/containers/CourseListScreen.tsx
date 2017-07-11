@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import {CourseListScreen, CourseListScreenPropsInterface} from '../components/CourseListScreen'
 
 const QUERY = gql`
-  query OfferingSearchQuery($studentAge: Int!, $offeringCourseCategoryIds: [Int!]) {
-    offeringSearch(filter: {age: {eq: $studentAge}, offeringCourseCategoryIds: $offeringCourseCategoryIds}) {
+  query OfferingSearchQuery($studentAge: Int!, $nationalityId: Int!, $offeringCourseCategoryIds: [Int!]) {
+    offeringSearch(filter: {age: {eq: $studentAge}, nationalityId: $nationalityId, offeringCourseCategoryIds: $offeringCourseCategoryIds}) {
       durationAmount, 
       durationType {
         durationTypeId
@@ -31,7 +31,7 @@ const QUERY = gql`
 `
 
 const CourseListScreenWithData = graphql<any, any>(QUERY, {
-  options: ({ studentAge, offeringCourseCategoryIds }) => ({ variables: {studentAge, offeringCourseCategoryIds} }),
+  options: ({ studentAge, studentCountryId, offeringCourseCategoryIds }) => ({ variables: {studentAge, nationalityId: studentCountryId, offeringCourseCategoryIds} }),
   props: ({ ownProps, data: {loading, offeringSearch} }): CourseListScreenPropsInterface => ({
     isLoading: loading, 
     courses: (!offeringSearch) ? [] : offeringSearch.map((course) => ({
@@ -48,7 +48,8 @@ const CourseListScreenWithData = graphql<any, any>(QUERY, {
 const CourseListScreenWithDataAndState = connect(
   (state) => ({
     offeringCourseCategoryIds: state.courseFilter.courseTypes.map((courseType) => {return courseType.value}), 
-    studentAge: state.courseFilter.age
+    studentAge: state.courseFilter.age, 
+    studentCountryId: state.courseFilter.countryId
   }), 
   (dispatch) => ({})
 )(CourseListScreenWithData)

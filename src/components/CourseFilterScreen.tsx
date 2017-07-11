@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom'
 
 import CourseTypeInput from './CourseTypeInput'
 import FormInputAge from './FormInputAge'
+import FormInputCountry from '../containers/FormInputCountry'
 
 class CourseFilterScreen extends React.Component<any, any> {
 
@@ -12,12 +13,14 @@ class CourseFilterScreen extends React.Component<any, any> {
 		// Initial state
 		this.state = {
 			age: props.age || 22, 
+			countryId: props.countryId || -1, 
 			language: props.language || '', 
 			courseTypes: props.courseTypes || []
 		};
 
 		// Bind private functions
 		this.handleAgeChange = this.handleAgeChange.bind(this);
+		this.handleCountryChange = this.handleCountryChange.bind(this);
 		this.handleLanguageChange = this.handleLanguageChange.bind(this);
 		this.handleCourseTypesChange = this.handleCourseTypesChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,6 +29,12 @@ class CourseFilterScreen extends React.Component<any, any> {
 	private handleAgeChange(event) {
 		const newState = this.state;
 		newState.age = event.target.value;
+		this.setState(newState);
+	}
+
+	private handleCountryChange(event) {
+		const newState = this.state;
+		newState.countryId = event.target.value;
 		this.setState(newState);
 	}
 
@@ -48,7 +57,7 @@ class CourseFilterScreen extends React.Component<any, any> {
 		if (!(this.state.age)) return alert('Please enter your age.');
 		
 		// Dispatch a Redux action & redirect to "/search"
-		this.props.onFilterChange(this.state.age, this.state.language, this.state.courseTypes)
+		this.props.onFilterChange(this.state.age, this.state.countryId, this.state.language, this.state.courseTypes)
 		this.props.history.push("/search")
 	}
 
@@ -58,6 +67,9 @@ class CourseFilterScreen extends React.Component<any, any> {
 				<form onSubmit={this.handleSubmit}>
 					<div>
 						Age: <FormInputAge name='studentAge' value={this.state.age} onChange={this.handleAgeChange} />
+					</div>
+					<div>
+						Country: <FormInputCountry name='studentCountry' selectedCountryId={this.state.countryId} onChange={this.handleCountryChange} />
 					</div>
 					<div>
 						Language: <input name='courseLanguage' type='text' value={this.state.language} onChange={this.handleLanguageChange} />

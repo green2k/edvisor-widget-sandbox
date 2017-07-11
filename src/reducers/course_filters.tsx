@@ -7,7 +7,8 @@ export const courseFiltersReducer = (state: AppStoreState = {}, action): AppStor
         ...state, 
         age: action.age, 
         language: action.language, 
-        courseTypes: action.courseTypes
+        courseTypes: action.courseTypes, 
+        countryId: action.countryId
       };
     default:
       return state;
