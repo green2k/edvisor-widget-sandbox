@@ -1,4 +1,6 @@
-export const courseFiltersReducer = (state = {}, action) => {
+import {AppStoreState} from '../types'
+
+export const courseFiltersReducer = (state: AppStoreState = {}, action): AppStoreState => {
   switch (action.type) {
     case 'COURSE_SET_FILTER':
       return {

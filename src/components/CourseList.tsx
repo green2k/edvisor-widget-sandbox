@@ -1,7 +1,12 @@
 import * as React from 'react'
-import Course from './Course'
+import {Course, CoursePropsInterface} from './Course'
 
-export const CourseList = ({isLoading, courses}) => (
+export interface CourseListPropsInterface {
+	isLoading: boolean;
+	courses: CoursePropsInterface[]
+}
+
+export const CourseList = ({isLoading, courses}: CourseListPropsInterface) => (
 	<div>
 		{
 			(isLoading)
@@ -9,7 +14,7 @@ export const CourseList = ({isLoading, courses}) => (
 				: (
 					(courses.length >= 1)
 					? courses.map(course => (
-						<Course key={course.id} name={course.name} description={course.description} price={course.price} ageMin={!(course.ageMin) ? '*' : course.ageMin} ageMax={!(course.ageMax) ? '*' : course.ageMax}/>
+						<Course id={course.id} key={course.id} name={course.name} description={course.description} price={course.price} ageMin={!(course.ageMin) ? '*' : course.ageMin} ageMax={!(course.ageMax) ? '*' : course.ageMax}/>
 					))
 					: <div>Nothing found :-(</div>
 				)

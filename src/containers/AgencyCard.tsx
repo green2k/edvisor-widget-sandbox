@@ -1,7 +1,7 @@
 import {gql, graphql} from 'react-apollo'
 import {connect} from 'react-redux'
 
-import AgencyCard from '../components/AgencyCard'
+import {AgencyCard, AgencyCardPropsInterface} from '../components/AgencyCard'
 
 const QUERY = gql`
   query AgencyQuery {
@@ -14,7 +14,7 @@ const QUERY = gql`
 `
 
 const AgencyCardWithData = graphql<any, any>(QUERY, {
-	props: ({ownProps, data: {loading, agencyCompany}}) => ({
+	props: ({ownProps, data: {loading, agencyCompany}}): AgencyCardPropsInterface => ({
 		isLoading: loading, 
 		name: agencyCompany ? agencyCompany.name : null, 
 		phone: agencyCompany ? agencyCompany.phone : null, 

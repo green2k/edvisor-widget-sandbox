@@ -1,6 +1,15 @@
 import * as React from 'react'
 
-export const Course = ({name, description, price, ageMin, ageMax}) => (
+export interface CoursePropsInterface {
+	id: number;
+	name: string;
+	description: string;
+	price: number;
+	ageMin: number | '*';
+	ageMax: number | '*';
+}
+
+export const Course = ({id, name, description, price, ageMin, ageMax}: CoursePropsInterface) => (
 	<div>
 		<h1>{name}</h1>
 		<div>Description: {description}</div>
@@ -8,5 +17,3 @@ export const Course = ({name, description, price, ageMin, ageMax}) => (
 		<div>Required age: {ageMin} - {ageMax}</div>
 	</div>
 );
-
-export default Course

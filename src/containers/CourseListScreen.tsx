@@ -1,7 +1,7 @@
 import {gql, graphql} from 'react-apollo';
 import {connect} from 'react-redux'
 
-import CourseListScreen from '../components/CourseListScreen'
+import {CourseListScreen, CourseListScreenPropsInterface} from '../components/CourseListScreen'
 
 const QUERY = gql`
   query OfferingSearchQuery($studentAge: Int!, $offeringCourseCategoryIds: [Int!]) {
@@ -32,7 +32,7 @@ const QUERY = gql`
 
 const CourseListScreenWithData = graphql<any, any>(QUERY, {
   options: ({ studentAge, offeringCourseCategoryIds }) => ({ variables: {studentAge, offeringCourseCategoryIds} }),
-  props: ({ ownProps, data: {loading, offeringSearch} }) => ({
+  props: ({ ownProps, data: {loading, offeringSearch} }): CourseListScreenPropsInterface => ({
     isLoading: loading, 
     courses: (!offeringSearch) ? [] : offeringSearch.map((course) => ({
       id: course.offering.offeringId, 
